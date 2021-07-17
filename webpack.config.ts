@@ -1,5 +1,4 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const config = {
   mode: 'development',
@@ -33,4 +32,4 @@ const config = {
   ]
 };
 
-module.exports = config;
+export default config;
