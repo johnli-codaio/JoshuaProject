@@ -1,3 +1,4 @@
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const config = {
@@ -28,6 +29,11 @@ const config = {
       template: 'index.html', 
       filename: 'index.html',
       inject: 'body', // Inject scripts into the body.
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {from: 'src/data', to: 'data'}
+      ]
     }),
   ]
 };

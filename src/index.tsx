@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
-
+import Globe from './components/globe'
 ReactDOM.render(
-  <div>hello</div>,
+  <Globe />,
   document.getElementById('root')
 );
