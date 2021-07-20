@@ -44,8 +44,8 @@ function Globe() {
       backgroundColor={'#FFFFFF'}
       polygonStrokeColor={'#000000'}
       showAtmosphere={false}
-      height={800}
-      width={800}
+      height={1000}
+      width={1000}
     />
   );
 }
