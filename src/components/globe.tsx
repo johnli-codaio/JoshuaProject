@@ -41,7 +41,7 @@ function Globe() {
         return properties.name;
       }}
       polygonCapColor={getPolygonColor}
-      backgroundColor={'#FFFFFF'}
+      backgroundColor={'rgba(0,0,0,0)'}
       polygonStrokeColor={'#000000'}
       showAtmosphere={false}
       height={1000}
