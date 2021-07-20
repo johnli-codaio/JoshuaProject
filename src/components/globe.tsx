@@ -5,6 +5,7 @@ import {useEffect} from 'react';
 import {useRef} from 'react';
 import {useState} from 'react';
 import {getDataUrl} from '../utils/import_utils';
+import classes from './globe.less';
 
 interface Props {
   onPolygonClick(): void;
@@ -33,20 +34,22 @@ function Globe() {
   }, []);
 
   return (
-    <ReactGlobe
-      ref={globeRef}
-      globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
-      polygonsData={countries.features.filter(d => d.properties.ISO_A2 !== 'AQ')}
-      polygonLabel={({properties}: any /* Fix type later */) => {
-        return properties.name;
-      }}
-      polygonCapColor={getPolygonColor}
-      backgroundColor={'rgba(0,0,0,0)'}
-      polygonStrokeColor={'#000000'}
-      showAtmosphere={false}
-      height={1000}
-      width={1000}
-    />
+    <div className={classes.container}>
+      <ReactGlobe
+        ref={globeRef}
+        globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
+        polygonsData={countries.features.filter(d => d.properties.ISO_A2 !== 'AQ')}
+        polygonLabel={({properties}: any /* Fix type later */) => {
+          return properties.name;
+        }}
+        polygonCapColor={getPolygonColor}
+        backgroundColor={'rgba(0,0,0,0)'}
+        polygonStrokeColor={'#000000'}
+        showAtmosphere={false}
+        height={1000}
+        width={1000}
+      />
+    </div>
   );
 }
 

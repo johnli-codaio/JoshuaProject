@@ -11,10 +11,23 @@ const config = {
         exclude: /node_modules/,
         loader: 'ts-loader',
       },
+      {
+        test: /\.less$/,
+        loader: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options:  {
+              modules: true,
+            },
+          },
+          'less-loader',
+        ],
+      }
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js', '.less'],
   },
   output: {
     path: `${__dirname}/dist`,
