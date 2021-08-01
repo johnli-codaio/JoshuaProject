@@ -1,0 +1,61 @@
+@import (reference) '../styles/mixins.less';
+@import (reference) '../styles/fonts.less';
+
+@max-page-width: 1280px;
+:local {
+  .root {
+    .vbox();
+    align-items: center;
+  }
+
+  .section {
+    .hbox();
+    .stretch();
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    background-color: #FCF0D9;
+  }
+
+  .banner {
+    .hbox();
+    .stretch();
+    align-items: center;
+    justify-content: space-between;
+    max-width: @max-page-width;
+    height: 90vh; // TODO (johnli): This might be different.
+    padding: 24px 48px;
+    z-index: 1;
+  }
+
+  .bannerImage {
+    .stretch();
+    opacity: 0.2;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 90vh;
+  }
+  .logo {
+    width: 540px;
+    max-width: 50vw;
+  }
+
+  .brandNameContainer {
+    .vbox();
+    align-items: center;
+  }
+
+  .brandName {
+    width: 540px;
+    margin-bottom: 28px;
+  }
+
+  .brandDescription {
+    .Lora();
+    max-width: 360px;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 28px;
+  }
+}
