@@ -14,7 +14,21 @@
     position: relative;
     justify-content: center;
     align-items: center;
-    background-color: #FCF0D9;
+    height: 800px; // TODO (johnli): This might be different.
+    padding: 48px;
+
+    &.bannerSection {
+      background-color: #FCF0D9;
+    }
+
+    &.quoteSection {
+      background-color: @color-brand-red;
+      align-items: flex-start;
+    }
+
+    &.taskInfoSection {
+      background-color: @color-light-gray;
+    }
   }
 
   .banner {
@@ -23,19 +37,19 @@
     align-items: center;
     justify-content: space-between;
     max-width: @max-page-width;
-    height: 70vh; // TODO (johnli): This might be different.
-    padding: 24px 48px;
     z-index: 1;
   }
 
-  .bannerImage {
+  .quoteBgImage {
     .stretch();
     opacity: 0.2;
     position: absolute;
     top: 0px;
     left: 0px;
-    height: 90vh;
+    height: 800px;
+    object-fit: cover;
   }
+
   .logo {
     width: 540px;
     max-width: 50vw;
@@ -57,5 +71,145 @@
     font-size: 24px;
     text-align: center;
     margin-bottom: 28px;
+  }
+
+  .quoteTextContainer {
+    .vbox();
+    .stretch();
+    .Lora();
+    max-width: @max-page-width;
+    font-size: 75px;
+    color: @color-text-primary-inverted;
+    z-index: 1;
+  }
+
+  .firstText {
+    max-width: 960px;
+  }
+
+  .secondText {
+    margin-left: auto;
+    max-width: 960px;
+    text-align: right;
+    transform: translateY(-75px);
+  }
+
+  .textEmphasis {
+    font-size: 150px;
+  }
+
+  .taskCardList {
+    .hbox();
+    .stretch();
+    max-width: @max-page-width;
+    height: 100%;
+  }
+
+  .taskCard {
+    height: 100%;
+    width: 33%;
+    transition: width 0.3s ease-in-out;
+
+    &.isOpen {
+      width: 100%;
+    }
+
+    &.isNotSelected {
+      display: none;
+      width: 0px;
+    }
+
+    &.blue {
+      background-color: @color-brand-blue-darker;
+    }
+
+    &.teal {
+      background-color: @color-brand-teal;
+    }
+  }
+
+  .layer {
+    .hbox();
+    justify-content: space-between;
+    padding: 48px;
+    height: 100%;
+    width: 100%;
+    opacity: 1;
+
+    &:hover {
+      opacity: 0.65;
+
+      &.isOpen {
+        opacity: 1;
+      }
+    }
+
+    &.globe {
+      background-image: url('../assets/info_globe.png');
+      background-position: center;
+      background-size: cover;
+    }
+
+    &.laptop {
+      background-image: url('../assets/info_data.png');
+      background-size: cover;
+      background-position: center;
+    }
+
+    &.help {
+      background-image: url('../assets/info_help.png');
+      background-size: cover;
+      background-position: center;
+    }
+  }
+
+  .taskHeaderText {
+    .Lora();
+    width: 1px; // Used to make each word on a new line.
+    font-size: 75px;
+    color: @color-text-primary-inverted;
+  }
+
+  .taskDescriptionContainer {
+    .vbox();
+    .Montserrat();
+    max-width: 640px;
+    text-align: right;
+    position: relative;
+    color: @color-text-primary-inverted;
+  }
+
+  .taskCardDescriptionHeader {
+    font-size: 36px;
+    margin-bottom: 36px;
+    line-height: 64px;
+  }
+
+  .taskCardVerse {
+    font-size: 48px;
+  }
+
+  .taskCardVerseSignature {
+    text-transform: uppercase;
+    font-size: 24px;
+  }
+
+  .taskCardCaption {
+    margin-top: auto;
+    text-transform: uppercase;
+    font-size: 48px;
+  }
+
+  .minimize {
+    position: absolute;
+    top: -32px;
+    right: -32px;
+    color: @color-text-primary-inverted;
+    cursor: pointer;
+  }
+
+  .taskCardButton {
+    margin-top: auto;
+    margin-left: auto;
   }
 }
