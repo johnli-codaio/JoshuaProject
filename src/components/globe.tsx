@@ -5,10 +5,10 @@ import {useCallback} from 'react';
 import {useEffect} from 'react';
 import {useRef} from 'react';
 import {useState} from 'react';
-import {getDataUrl} from '../utils/import_utils';
+import {getAssetUrl, getDataUrl} from '../utils/import_utils';
 import classNames from 'classnames';
 import classes from './globe.less';
-import {getCountries} from '../api/joshuaproject';
+import {getCountries, getPeoples} from '../api/joshuaproject';
 import _ from 'lodash';
 
 interface Props {
@@ -23,12 +23,17 @@ enum Severity {
   Extreme,
 }
 
-const ColorCodedSeverity = {
+const CountryColorCodedSeverity = {
   [Severity.Mild]: '#FFF2EB',
   [Severity.Moderate]: '#FFCEC2',
   [Severity.Severe]: '#E79C9F',
   [Severity.Extreme]: '#AA747E',
 };
+
+const PeopleColorCodedSeverity = {
+  [Severity.Moderate]: '#CEA7EE',
+  [Severity.Extreme]: '#461E5C',
+}
 
 // TODO (johnli): Look into hover tooltips
 function Globe() {
@@ -36,6 +41,7 @@ function Globe() {
 
   const [countries, setCountries] = useState<Countries>({features: []});
   const [countryData, setCountryData] = useState<Record<string, any>>({});
+  const [peopleData, setPeopleData] = useState<Array<any>>([]);
   const [initialized, setInitialized] = useState<boolean> (false);
 
   const setupLighting = () => {
@@ -65,6 +71,12 @@ function Globe() {
 
     setCountries(geoLocation);
     setCountryData(fetchedCountryDataMap);
+  };
+  
+  const loadPeopleData = async () => {
+    const {data: fetchedPeopleData} = await getPeoples();
+    console.log(fetchedPeopleData.data.sort((a, b) => a.WorkersNeeded - b.WorkersNeeded));
+    setPeopleData(fetchedPeopleData.data);
   };
 
   // TODO (johnli): Have better coloring, pull information from Joshua Project.
@@ -96,18 +108,18 @@ function Globe() {
     }
 
     if (reachScore < 10) {
-      return ColorCodedSeverity[Severity.Mild];
+      return CountryColorCodedSeverity[Severity.Mild];
     }
 
     if (reachScore < 30) {
-      return ColorCodedSeverity[Severity.Moderate];
+      return CountryColorCodedSeverity[Severity.Moderate];
     }
 
     if (reachScore < 100) {
-      return ColorCodedSeverity[Severity.Severe];
+      return CountryColorCodedSeverity[Severity.Severe];
     }
 
-    return ColorCodedSeverity[Severity.Extreme];
+    return CountryColorCodedSeverity[Severity.Extreme];
   }, [countryData]);
 
   const globeMaterial = new THREE.MeshPhongMaterial({
@@ -118,28 +130,38 @@ function Globe() {
 
   useEffect(() => {
     void loadCountryData();
+    void loadPeopleData();
   }, []);
 
 
   // Apparently does not work in useEffect.
   setupLighting();
+
   return (
-    <div className={classNames(classes.container, {[classes.hide]: !initialized})}>
-      <ReactGlobe
-        ref={globeRef}
-        waitForGlobeReady={true}
-        globeMaterial={globeMaterial}
-        polygonsData={countries.features.filter(d => d.properties.ISO_A2 !== 'AQ')}
-        polygonLabel={({properties}: any /* Fix type later */) => {
-          return properties.name;
-        }}
-        polygonCapColor={getPolygonColor}
-        backgroundColor={'rgba(0,0,0,0)'}
-        polygonStrokeColor={'#FFFFFF'}
-        showAtmosphere={false}
-        height={1000}
-        width={1000}
-      />
+    <div className={classNames(classes.container)}>
+      <img className={classNames(classes.loadingSpinner, {[classes.hide]: initialized})} src={getAssetUrl('spinner.gif')} />
+      <div className={classNames(classes.globeContainer, {[classes.hide]: !initialized})}>
+        <ReactGlobe
+          ref={globeRef}
+          waitForGlobeReady={true}
+          globeMaterial={globeMaterial}
+          polygonsData={countries.features.filter(d => d.properties.ISO_A2 !== 'AQ')}
+          polygonLabel={({properties}: any /* Fix type later */) => {
+            return properties.name;
+          }}
+          polygonCapColor={getPolygonColor}
+          pointsData={peopleData}
+          pointLat={(p: any) => p.Latitude}
+          pointLng={(p: any) => p.Longitude}
+          pointColor={(p: any) => p.LeastReached === 'Y' ? PeopleColorCodedSeverity[Severity.Extreme] : PeopleColorCodedSeverity[Severity.Moderate]}
+          pointAltitude={(p: any) => Math.max(Math.log(p.WorkersNeeded || 0) * 0.05, 0.025)}
+          backgroundColor={'rgba(0,0,0,0)'}
+          polygonStrokeColor={'#FFFFFF'}
+          showAtmosphere={false}
+          height={1000}
+          width={1000}
+        />
+      </div>
     </div>
   );
 }
