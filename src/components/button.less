@@ -8,6 +8,7 @@
     .hbox();
     justify-content: center;
     align-items: center;
+    width: fit-content;
 
     padding: 12px 24px;
     border-radius: 32px;
@@ -22,6 +23,17 @@
     &:hover {
       background-color: @color-primary-button-hover;
       border: 1px solid @color-primary-button-hover;
+    }
+  }
+
+  .secondary {
+    background-color: @color-secondary-button;
+    border: 1px solid @color-secondary-button;
+    color: @color-white;
+
+    &:hover {
+      background-color: @color-secondary-button-hover;
+      border: 1px solid @color-secondary-button-hover;
     }
   }
 }
