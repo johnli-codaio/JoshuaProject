@@ -48,10 +48,12 @@ function Navbar(props: Props) {
 
   return (
     <div className={classes.navbar}>
-      <img
-        className={classNames(classes.logo, {[classes.visible]: showLogo})}
-        src ={getAssetUrl('logo_with_name.svg')}
-      />
+      <a href={'/'}>
+        <img
+          className={classNames(classes.logo, {[classes.visible]: showLogo})}
+          src ={getAssetUrl('logo_with_name.svg')}
+        />
+      </a>
       <div className={classes.tabs}>
         {...tabs.map(renderTab)}
         {/* TODO: Implement search if we have time. */}
