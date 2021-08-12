@@ -1,0 +1,64 @@
+@import (reference) '../styles/colors.less';
+@import (reference) '../styles/mixins.less';
+@import (reference) '../styles/fonts.less';
+
+:local {
+  .content {
+    position: relative;
+    .vbox();
+    .stretch();
+  }
+
+  .countryName {
+    .Lora();
+  }
+
+  .tabs {
+    .hbox();
+  }
+
+  .header {
+    .Lora();
+    letter-spacing: 1.2px;
+    font-size: 48px;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  .overview {
+    .Montserrat();
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    color: @color-black-text;
+  }
+
+  .overviewCell {
+    .vbox();
+    padding: 18px 6px;
+    max-width: 200px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cellHeader {
+    font-size: 20px;
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .cellValue {
+    font-size: 16px;
+  }
+
+  .exit {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+
+    height: 24px;
+    width: 24px;
+    cursor: pointer;
+  }
+}

@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import ReactGlobe from 'react-globe.gl';
 import type {Countries} from '../types/globe';
+import CountryInfo from './country_info';
 import {useCallback} from 'react';
 import {useEffect} from 'react';
 import {useRef} from 'react';
@@ -31,18 +32,22 @@ const CountryColorCodedSeverity = {
 };
 
 const PeopleColorCodedSeverity = {
-  [Severity.Moderate]: '#CEA7EE',
-  [Severity.Extreme]: '#461E5C',
+  [Severity.Moderate]: '#709775',
+  [Severity.Extreme]: '#D00000',
 }
 
-// TODO (johnli): Look into hover tooltips
+// TODO (johnli): Look into hover tooltip
 function Globe() {
   const globeRef = useRef<any>(null);
 
   const [countries, setCountries] = useState<Countries>({features: []});
   const [countryData, setCountryData] = useState<Record<string, any>>({});
   const [peopleData, setPeopleData] = useState<Array<any>>([]);
+  const [countryPeopleData, setCountryPeopleData] = useState<Array<any>>([]);
   const [initialized, setInitialized] = useState<boolean> (false);
+  const [currentCountry, setCurrentCountry] = useState<any | null>(null);
+  const [hoveredCountry, setHoveredCountry] = useState<any | null>(null);
+  const [currentPeopleGroup, setCurrentPeopleGroup] = useState<any | null>(null);
 
   const setupLighting = () => {
     const globe = globeRef.current;
@@ -75,12 +80,10 @@ function Globe() {
   
   const loadPeopleData = async () => {
     const {data: fetchedPeopleData} = await getPeoples();
-    console.log(fetchedPeopleData.data.sort((a, b) => a.WorkersNeeded - b.WorkersNeeded));
     setPeopleData(fetchedPeopleData.data);
   };
 
-  // TODO (johnli): Have better coloring, pull information from Joshua Project.
-  const getPolygonColor = useCallback((polygon) => {
+  const getCountry = (polygon) => {
     let country = countryData[polygon.properties.iso_a2];
 
     if (polygon.properties.iso_a2 === '-99') {
@@ -96,6 +99,12 @@ function Globe() {
         country = countryData['XK'];
       }
     }
+
+    return country;
+  }
+  // TODO (johnli): Have better coloring, pull information from Joshua Project.
+  const getPolygonColor = useCallback((polygon) => {
+    const country = getCountry(polygon);
 
     const ratioOfUnreachedPeople = country.PoplPeoplesLR / country.PoplPeoples;
     const numWorkersNeeded = country.WorkersNeeded ?? 0;
@@ -134,8 +143,47 @@ function Globe() {
   }, []);
 
 
+  useEffect(() => {
+    if (currentCountry) {
+      const country = getCountry(currentCountry);
+      const peopleGroup = peopleData.filter(people => people.ROG3 === country.ROG3);
+      setCountryPeopleData(peopleGroup);
+    }
+  }, [currentCountry, peopleData]);
+
   // Apparently does not work in useEffect.
   setupLighting();
+
+
+  const onCountryClose = useCallback(() => {
+    setCurrentCountry(null);
+    setCountryPeopleData([]);
+  }, []);
+
+  const renderDetails = () => {
+    if (!currentCountry && !currentPeopleGroup) {
+      return null;
+    }
+
+    if (currentPeopleGroup) {
+      return (
+        <div className={classes.peopleContainer}>
+
+        </div>
+      );
+    }
+
+    if (currentCountry) {
+      const country = getCountry(currentCountry);
+
+      return (
+        <div className={classes.countryContainer}>
+          <CountryInfo country={country} onClose={onCountryClose}/>
+        </div>
+      );
+    };
+  };
+
 
   return (
     <div className={classNames(classes.container)}>
@@ -147,20 +195,38 @@ function Globe() {
           globeMaterial={globeMaterial}
           polygonsData={countries.features.filter(d => d.properties.ISO_A2 !== 'AQ')}
           polygonLabel={({properties}: any /* Fix type later */) => {
-            return properties.name;
+            return `<span style="color:#111111;font-weight:bold">${properties.name}</span>`;
           }}
           polygonCapColor={getPolygonColor}
-          pointsData={peopleData}
+          polygonSideColor={() => '#666'}
+          onPolygonHover={setHoveredCountry}
+          onPolygonClick={setCurrentCountry}
+          polygonAltitude={polygon => {
+            if (polygon === currentCountry) {
+              return 0.08;
+            } else if (polygon === hoveredCountry) {
+              return 0.04;
+            } else {
+              return 0.01;
+            }
+          }}
+          pointsData={countryPeopleData}
           pointLat={(p: any) => p.Latitude}
           pointLng={(p: any) => p.Longitude}
+          pointRadius={0.30}
           pointColor={(p: any) => p.LeastReached === 'Y' ? PeopleColorCodedSeverity[Severity.Extreme] : PeopleColorCodedSeverity[Severity.Moderate]}
-          pointAltitude={(p: any) => Math.max(Math.log(p.WorkersNeeded || 0) * 0.05, 0.025)}
+          pointAltitude={(p: any) => Math.max(Math.log(p.WorkersNeeded || 1) * 0.07 + 0.1, 0.1)}
           backgroundColor={'rgba(0,0,0,0)'}
-          polygonStrokeColor={'#FFFFFF'}
+          polygonStrokeColor={() => '#111'}
+          polygonsTransitionDuration={300}
+          pointsTransitionDuration={300}
           showAtmosphere={false}
           height={1000}
           width={1000}
         />
+      </div>
+      <div className={classes.detailsContainer}>
+        {renderDetails()}
       </div>
     </div>
   );
