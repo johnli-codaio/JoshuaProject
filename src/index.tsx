@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Home from './pages/home';
+import WhatIsTheTask from './pages/what_is_the_task';
 import './styles/index.less';
 
 ReactDOM.render(
@@ -10,7 +11,7 @@ ReactDOM.render(
         <Home />
       </Route>
       <Route path="/what-is-the-task">
-        <Home />
+        <WhatIsTheTask />
       </Route> 
       <Route path="/who-are-the-unreached">
         <Home />
