@@ -1,4 +1,5 @@
 import { getAssetUrl } from '../utils/import_utils';
+import {Link} from 'react-router-dom';
 import classes from './footer.less';
 interface Props {}
 
@@ -12,23 +13,23 @@ function Footer(props: Props) {
           <div className={classes.linksContainer}>
             <div className={classes.links}>
               <span className={classes.linkHeader}>General</span>
-              <a className={classes.link} href={'/'}>About</a>
-              <a className={classes.link} href={'/'}>History</a>
-              <a className={classes.link} href={'/'}>Beliefs</a>
+              <Link className={classes.link} to={'/'}>About</Link>
+              <Link className={classes.link} to={'/'}>History</Link>
+              <Link className={classes.link} to={'/'}>Beliefs</Link>
             </div>
             <div className={classes.links}>
               <span className={classes.linkHeader}>Next Steps</span>
-              <a className={classes.link} href={'/'}>Explore Data</a>
-              <a className={classes.link} href={'/'}>Prayer Guides</a>
-              <a className={classes.link} href={'/'}>Multilingual Versions</a>
-              <a className={classes.link} href={'/'}>Children's Materials</a>
+              <Link className={classes.link} to={'/'}>Explore Data</Link>
+              <Link className={classes.link} to={'/'}>Prayer Guides</Link>
+              <Link className={classes.link} to={'/'}>Multilingual Versions</Link>
+              <Link className={classes.link} to={'/'}>Children's Materials</Link>
             </div>
             <div className={classes.links}>
               <span className={classes.linkHeader}>Support</span>
-              <a className={classes.link} href={'/'}>Donate</a>
-              <a className={classes.link} href={'/'}>Get Involved</a>
-              <a className={classes.link} href={'/'}>Finances & Partners</a>
-              <a className={classes.link} href={'/'}>Feedback</a>
+              <Link className={classes.link} to={'/donate'}>Donate</Link>
+              <Link className={classes.link} to={'/get-involved'}>Get Involved</Link>
+              <Link className={classes.link} to={'/'}>Finances & Partners</Link>
+              <Link className={classes.link} to={'/'}>Feedback</Link>
             </div>
           </div>
         </div>
