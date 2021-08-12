@@ -1,6 +1,7 @@
 import {Button, ButtonStyle} from '../components/button';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
+import {Link} from 'react-router-dom';
 import Globe from '../components/globe';
 import classNames from 'classnames';
 import * as classes from './home.less';
@@ -13,8 +14,6 @@ enum TaskCard {
   WhatWeDo = 'WhatWeDo',
   WhatYouCanDo = 'WhatYouCanDo',
 };
-
-interface Props {}
 
 function Home() {
   // TODO (johnli): Have this be set via intersection observer.
@@ -99,7 +98,10 @@ function Home() {
                     <span className={classes.taskCardDescriptionHeader}>Jesus sent his believers.</span>
                     <span className={classes.taskCardVerse}>"Go and make disciples of all nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit"</span>
                     <span className={classes.taskCardVerseSignature}>Matthew 28:19</span>
-                    <span className={classes.taskCardCaption}>Great Commission</span> 
+                    <span className={classes.taskCardCaption}>Great Commission</span>
+                    <Link className={classes.link} to={'/what-is-the-task'}>
+                      <Button className={classes.taskCardButton} onClick={() => {}} style={ButtonStyle.Secondary}>Learn More</Button>
+                    </Link>
                   </div>
                 : null}
             </div>
@@ -122,7 +124,9 @@ function Home() {
                 ? <div className={classes.taskDescriptionContainer}>
                     <img className={classes.minimize} src={getAssetUrl('minimize.svg')} onClick={resetTaskCard}/>
                     <span className={classes.taskCardDescriptionHeader}>Joshua Project seeks to <br /><b>define</b> the unfinished task of the <b>Great Commission</b> by using <b>data</b> to spotlight global ethnic people groups with the <br /><b>fewest followers of Christ</b></span>
-                    <Button className={classes.taskCardButton} onClick={() => {/* TODO */}} style={ButtonStyle.Secondary}>About Us</Button>
+                    <Link className={classes.link} to={'/who-are-the-unreached'}>
+                      <Button className={classes.taskCardButton} onClick={() => {}} style={ButtonStyle.Secondary}>Who are these people groups?</Button>
+                    </Link>
                   </div>
                 : null}
             </div>

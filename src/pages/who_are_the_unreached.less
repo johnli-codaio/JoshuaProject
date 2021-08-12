@@ -1,0 +1,83 @@
+@import (reference) '../styles/mixins.less';
+@import (reference) '../styles/colors.less';
+@import (reference) '../styles/fonts.less';
+@import (reference) './shared.less';
+
+:local {
+  .root {
+    .root();
+  }
+
+  .banner {
+    .stretch();
+    margin-top: 76px; //Offset for navbar
+    height: 480px;
+    object-fit: cover;
+  }
+
+  .title {
+    .Lora();
+    font-size: 42px;
+    text-align: left;
+    color: @color-text-primary;
+    margin-bottom: 36px;
+
+    &.marginTop {
+      margin-top: 56px;
+    }
+  }
+
+  .contentContainer {
+    .vbox();
+    .stretch();
+    align-items: center;
+    justify-content: center;
+    padding: 84px 48px 0px 48px;
+  }
+
+  .content {
+    .vbox();
+    .stretch();
+    max-width: @max-page-width;
+  }
+
+  .orangeDivider {
+    width: 375px;
+    border-bottom: 4px solid @color-brand-orange;
+    margin-bottom: 40px;
+  }
+
+  .text {
+    .Montserrat();
+    text-align: left;
+    line-height: 2.5;
+  }
+
+  .verseText {
+    .Montserrat();
+    position: relative;
+    color: @color-brand-orange;
+    font-size: 32px;
+    line-height: 48px;
+    text-align: justify;
+  }
+
+  .verseContainer {
+    margin: 24px 0px ;
+    align-self: center;
+    max-width: 650px;
+  }
+
+  .superScript {
+    .Montserrat();
+    font-size: 16px;
+    color: @color-brand-orange;
+  }
+
+  .footNote {
+    .Montserrat();
+    font-size: 10px;
+    line-height: 2;
+    color: @color-dark-gray;
+  }
+}
