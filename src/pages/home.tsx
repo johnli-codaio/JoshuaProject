@@ -1,5 +1,6 @@
 import {Button, ButtonStyle} from '../components/button';
 import Navbar from '../components/navbar';
+import Footer from '../components/footer';
 import Globe from '../components/globe';
 import classNames from 'classnames';
 import * as classes from './home.less';
@@ -163,6 +164,7 @@ function Home() {
       {showInteractiveGlobe ? <Globe /> : renderBanner()}
       {renderQuoteSection()}
       {renderTaskInfoList()}
+      <Footer />
     </div> 
   );
 }
