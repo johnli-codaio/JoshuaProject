@@ -1,5 +1,6 @@
 import {Button, ButtonStyle} from '../components/button';
 import Navbar from '../components/navbar';
+import Globe from '../components/globe';
 import classNames from 'classnames';
 import * as classes from './home.less';
 import {getAssetUrl} from '../utils/import_utils';
@@ -15,14 +16,15 @@ enum TaskCard {
 interface Props {}
 
 function Home() {
+  // TODO (johnli): Have this be set via intersection observer.
   const [showLogoInNavbar, setShowLogoInNavbar] = useState<boolean>(false);
   const [activeTaskInfoCard, setActiveTaskInfoCard] = useState<TaskCard | null>(null);
   const [showInteractiveGlobe, setShowInteractiveGlobe] = useState<boolean>(false);
 
   const onBannerButtonClick = useCallback(() => {
     // TODO (johnli): show the sick new globe stuff.
-    toggleLogoOnNavbar();
-  }, [showLogoInNavbar]);
+    setShowInteractiveGlobe(true);    
+  }, []);
 
   const onTaskCardClick = (taskCard: TaskCard) => {
     return useCallback(() => {
@@ -157,8 +159,8 @@ function Home() {
 
   return (
     <div className={classes.root}>
-      <Navbar showLogo={showLogoInNavbar}/>
-      {renderBanner()}
+      <Navbar showLogo={true}/>
+      {showInteractiveGlobe ? <Globe /> : renderBanner()}
       {renderQuoteSection()}
       {renderTaskInfoList()}
     </div> 
