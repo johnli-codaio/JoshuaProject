@@ -16,8 +16,9 @@ function WhoAreTheUnreached() {
           </span>
           <div className={classes.orangeDivider} />
           <span className={classes.text}>
-            An unreached or least-reached people is a people group among which there is <b>no indigenous community of believing Christians</b>
-            with adequate numbers and resources to evangelize this people group <b>without outside assistance.</b>          </span>
+            An unreached or least-reached people is a people group among which there is <b>no indigenous community of believing Christians </b>
+            with adequate numbers and resources to evangelize this people group <b>without outside assistance.</b>
+          </span>
           <span className={classNames(classes.title, classes.marginTop)}>
             Why are they considered "unreached"?
           </span>
@@ -42,10 +43,10 @@ function WhoAreTheUnreached() {
           <span className={classes.footNote}>
             <sup>1</sup>Robert Bellah, Institute for Advanced Study at Princeton University, originally quoted in <i>Psychology Today</i> in the 1970s,
             currently quoted in <i>Christianity Today</i> Oct 2011: 42.)
-          </span> 
+          </span>
         </div>
       </div>
-      <Footer /> 
+      <Footer />
     </div>
   )
 }

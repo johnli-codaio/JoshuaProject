@@ -31,7 +31,7 @@ function CountryInfo(props: Props) {
         </div>
         <div className={classes.overviewCell}>
           <span className={classes.cellHeader}>Largest Religion</span>
-          <span className={classes.cellValue}>{country.ReligionPrimary} ({Math.round(country.PercentChristianity)}%)</span>
+          <span className={classes.cellValue}>{country.ReligionPrimary} ({Math.round(country.PercentChristianity)}% Christians)</span>
         </div>
 
         <div className={classes.overviewCell}>

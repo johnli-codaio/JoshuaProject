@@ -23,7 +23,7 @@ function Home() {
 
   const onBannerButtonClick = useCallback(() => {
     // TODO (johnli): show the sick new globe stuff.
-    setShowInteractiveGlobe(true);    
+    setShowInteractiveGlobe(true);
   }, []);
 
   const onTaskCardClick = (taskCard: TaskCard) => {
@@ -88,7 +88,7 @@ function Home() {
             )}
             onClick={onTaskCardClick(TaskCard.WhatTheTaskIs)}
           >
-            <div className={classNames(classes.layer, classes.globe, 
+            <div className={classNames(classes.layer, classes.globe,
               {[classes.isOpen]: activeTaskInfoCard === TaskCard.WhatTheTaskIs},
             )}>
               <div className={classes.taskHeaderText}>what the task is</div>
@@ -116,7 +116,7 @@ function Home() {
             )}
             onClick={onTaskCardClick(TaskCard.WhatWeDo)}
           >
-            <div className={classNames(classes.layer, classes.laptop, 
+            <div className={classNames(classes.layer, classes.laptop,
               {[classes.isOpen]: activeTaskInfoCard === TaskCard.WhatWeDo},
             )}>
               <div className={classes.taskHeaderText}>what we do</div>
@@ -141,7 +141,7 @@ function Home() {
             )}
             onClick={onTaskCardClick(TaskCard.WhatYouCanDo)}
           >
-            <div className={classNames(classes.layer, classes.help, 
+            <div className={classNames(classes.layer, classes.help,
               {[classes.isOpen]: activeTaskInfoCard === TaskCard.WhatYouCanDo},
             )}>
               <div className={classes.taskHeaderText}>what you can do</div>
@@ -151,7 +151,9 @@ function Home() {
                     <span className={classes.taskCardDescriptionHeader}>Your light is purposeful.</span>
                     <span className={classes.taskCardVerse}>Let your light shine before men in such a way that they may see your good works, and glorify your Father who is in heaven."</span>
                     <span className={classes.taskCardVerseSignature}>Matthew 5:16</span>
-                    <Button className={classes.taskCardButton} onClick={() => {/* TODO */}} style={ButtonStyle.Secondary}>Get Involved</Button>
+                    <Link className={classes.link} to={'/get-involved'}>
+                        <Button className={classes.taskCardButton} onClick={() => {}} style={ButtonStyle.Secondary}>Get Involved</Button>
+                    </Link>
                   </div>
                 : null}
             </div>
@@ -169,7 +171,7 @@ function Home() {
       {renderQuoteSection()}
       {renderTaskInfoList()}
       <Footer />
-    </div> 
+    </div>
   );
 }
 
