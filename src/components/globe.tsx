@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import ReactGlobe from 'react-globe.gl';
 import type {Countries} from '../types/globe';
 import CountryInfo from './country_info';
+import PeopleInfo from './people_info';
 import {useCallback} from 'react';
 import {useEffect} from 'react';
 import {useRef} from 'react';
@@ -53,11 +54,15 @@ function Globe() {
     const globe = globeRef.current;
     if (globe && !initialized) {
       const lighting = globe.scene();
+      const controls = globe.controls();
       const ambientLighting = lighting.children[1];
       const directionalLighting = lighting.children[2];
   
       ambientLighting.intensity = 1.25;
       directionalLighting.intensity = 0.05;
+
+      globe.pointOfView({altitude: 1.75});
+      controls.minDistance = 240;
 
       setInitialized(true);
     }
@@ -160,30 +165,35 @@ function Globe() {
     setCountryPeopleData([]);
   }, []);
 
-  const renderDetails = () => {
-    if (!currentCountry && !currentPeopleGroup) {
+  const onPeopleClose = useCallback(() => {
+    setCurrentPeopleGroup(null);
+  }, []);
+
+  const renderCountryDetails = () => {
+    if (!currentCountry) {
       return null;
     }
 
-    if (currentPeopleGroup) {
-      return (
-        <div className={classes.peopleContainer}>
+    const country = getCountry(currentCountry);
 
-        </div>
-      );
-    }
-
-    if (currentCountry) {
-      const country = getCountry(currentCountry);
-
-      return (
-        <div className={classes.countryContainer}>
-          <CountryInfo country={country} onClose={onCountryClose}/>
-        </div>
-      );
-    };
+    return (
+      <div className={classes.countryContainer}>
+        <CountryInfo country={country} onClose={onCountryClose}/>
+      </div>
+    );
   };
 
+  const renderPeopleDetails = () => {
+    if (!currentPeopleGroup) {
+      return null;
+    }
+
+    return (
+      <div className={classes.peopleContainer}>
+        <PeopleInfo peopleGroup={currentPeopleGroup} onClose={onPeopleClose} />
+      </div> 
+    );
+  };
 
   return (
     <div className={classNames(classes.container)}>
@@ -194,13 +204,20 @@ function Globe() {
           waitForGlobeReady={true}
           globeMaterial={globeMaterial}
           polygonsData={countries.features.filter(d => d.properties.ISO_A2 !== 'AQ')}
-          polygonLabel={({properties}: any /* Fix type later */) => {
-            return `<span style="color:#111111;font-weight:bold">${properties.name}</span>`;
+          polygonLabel={(polygon: any) => {
+            if (polygon === currentCountry) {
+              return '';
+            }
+
+            return `<span style="color:#111111;font-weight:bold">${polygon.properties.name}</span>`;
           }}
           polygonCapColor={getPolygonColor}
           polygonSideColor={() => '#666'}
           onPolygonHover={setHoveredCountry}
-          onPolygonClick={setCurrentCountry}
+          onPolygonClick={country => {
+            setCurrentCountry(country);
+            setCurrentPeopleGroup(null);
+          }}
           polygonAltitude={polygon => {
             if (polygon === currentCountry) {
               return 0.08;
@@ -216,6 +233,10 @@ function Globe() {
           pointRadius={0.30}
           pointColor={(p: any) => p.LeastReached === 'Y' ? PeopleColorCodedSeverity[Severity.Extreme] : PeopleColorCodedSeverity[Severity.Moderate]}
           pointAltitude={(p: any) => Math.max(Math.log(p.WorkersNeeded || 1) * 0.07 + 0.1, 0.1)}
+          onPointClick={setCurrentPeopleGroup}
+          pointLabel={(point: any) => {
+            return `<span style="color:#111111;">${point.NaturalName}</span>`;
+          }}
           backgroundColor={'rgba(0,0,0,0)'}
           polygonStrokeColor={() => '#111'}
           polygonsTransitionDuration={300}
@@ -226,7 +247,8 @@ function Globe() {
         />
       </div>
       <div className={classes.detailsContainer}>
-        {renderDetails()}
+        {renderCountryDetails()}
+        {renderPeopleDetails()}
       </div>
     </div>
   );

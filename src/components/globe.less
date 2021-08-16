@@ -38,7 +38,11 @@
   }
 
   .peopleContainer {
-    
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 8px @color-medium-gray;
+    background-color: #FDF7EC;
+    width: fit-content;
   }
 
   .countryContainer {
@@ -46,9 +50,14 @@
     border-radius: 12px;
     box-shadow: 0px 0px 8px @color-medium-gray;
     background-color: #FDF7EC;
+
+    margin-bottom: 24px;
+    width: fit-content;
   }
 
   .detailsContainer {
+    .vbox();
+    align-items: flex-end;
     position: absolute;
     top: 15%;
     right: 5%;
