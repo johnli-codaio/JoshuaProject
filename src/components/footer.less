@@ -58,9 +58,13 @@
   .link {
     font-size: 14px;
     margin-bottom: 4px;
-    cursor: pointer;
+    cursor: not-allowed;
     color: @color-brand-orange;
     text-decoration: none;
+
+    &.allowed {
+      cursor: pointer;
+    }
   }
 
   .divider {
