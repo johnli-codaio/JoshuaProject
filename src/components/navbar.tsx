@@ -48,7 +48,7 @@ function Navbar(props: Props) {
     // TODO (johnli): Create an anchored popover component.
     return tab.href
       ? <Link className={classes.tab} to={tab.href}>{tab.name}</Link>
-      : <span className={classes.tab}>{tab.name}</span>;
+      : <span className={classNames(classes.tab, classes.notAllowed)}>{tab.name}</span>;
   };
 
   return (

@@ -1,5 +1,6 @@
 import { getAssetUrl } from '../utils/import_utils';
 import {Link} from 'react-router-dom';
+import classNames from 'classnames';
 import classes from './footer.less';
 interface Props {}
 
@@ -13,23 +14,23 @@ function Footer(props: Props) {
           <div className={classes.linksContainer}>
             <div className={classes.links}>
               <span className={classes.linkHeader}>General</span>
-              <Link className={classes.link} to={'/'}>About</Link>
-              <Link className={classes.link} to={'/'}>History</Link>
-              <Link className={classes.link} to={'/'}>Beliefs</Link>
+              <span className={classes.link}>About</span>
+              <span className={classes.link}>History</span>
+              <span className={classes.link}>Beliefs</span>
             </div>
             <div className={classes.links}>
               <span className={classes.linkHeader}>Next Steps</span>
-              <Link className={classes.link} to={'/'}>Explore Data</Link>
-              <Link className={classes.link} to={'/'}>Prayer Guides</Link>
-              <Link className={classes.link} to={'/'}>Multilingual Versions</Link>
-              <Link className={classes.link} to={'/'}>Children's Materials</Link>
+              <span className={classes.link}>Explore Data</span>
+              <span className={classes.link}>Prayer Guides</span>
+              <span className={classes.link}>Multilingual Versions</span>
+              <span className={classes.link}>Children's Materials</span>
             </div>
             <div className={classes.links}>
               <span className={classes.linkHeader}>Support</span>
-              <Link className={classes.link} to={'/donate'}>Donate</Link>
-              <Link className={classes.link} to={'/get-involved'}>Get Involved</Link>
-              <Link className={classes.link} to={'/'}>Finances & Partners</Link>
-              <Link className={classes.link} to={'/'}>Feedback</Link>
+              <span className={classes.link}>Donate</span>
+              <Link className={classNames(classes.link, classes.allowed)} to={'/get-involved'}>Get Involved</Link>
+              <span className={classes.link}>Finances & Partners</span>
+              <span className={classes.link}>Feedback</span>
             </div>
           </div>
         </div>
