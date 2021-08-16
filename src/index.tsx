@@ -17,9 +17,6 @@ ReactDOM.render(
       <Route path="/donate">
         <Home />
       </Route>
-      <Route path="/get-involved">
-        <Home />
-      </Route>
       <Route path="/" component={Home} />
     </Switch>
   </Router>,

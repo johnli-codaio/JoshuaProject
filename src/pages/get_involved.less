@@ -8,6 +8,16 @@
     .root();
   }
 
+  .bannerContainer {
+    .vbox();
+    .stretch();
+    height: 480px;
+    align-items: center;
+    margin-top: 76px; //Offset for navbar
+    background: url('../assets/get_involved/get_involved.png');
+    background-size: cover;
+  }
+
   .banner {
     .stretch();
     margin-top: 76px; //Offset for navbar
@@ -15,16 +25,20 @@
     object-fit: cover;
   }
 
+  .bannerTextContainer {
+    .stretch();
+    .vbox();
+    max-width: @max-page-width;
+    margin-top: auto;
+    margin-bottom: 72px;
+  }
+
   .banner_text {
-      .Lora();
-      color: @color-text-primary-inverted;
-      position: absolute;
-      width: 861px;
-      top: 288px;
-      left: 131px;
-      font-size: 74px;
-      opacity: 1;
-      text-align: left;
+    .Lora();
+    color: @color-text-primary-inverted;
+    max-width: 860px;
+    font-size: 74px;
+    text-align: left;
   }
 
   .title {
@@ -85,15 +99,135 @@
   }
 
   .logo {
-    height: 100px;
+    height: 150px;
     width: auto;
     display:block;
-    margin:auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 24px;
   }
 
   .logo_text {
     .Montserrat();
+    font-size: 28px;
     text-align: center;
-    line-height: 2.5;
+    line-height: 1.5;
+  }
+
+  .link {
+    color: @color-text-primary;
+    text-decoration: none;
+
+    &:hover {
+      color: @color-brand-blue-darker;
+    }
+  }
+
+  .getInvolvedCard {
+    .stretch();
+    position: relative;
+    height: 480px;
+  }
+
+  .leftCardImage {
+    height: 480px;
+    width: min(1080px, 60vw);
+    object-fit: cover;    
+  }
+
+  .rightCardImage {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    height: 480px;
+    width: min(1080px, 60vw);
+    object-fit: cover;    
+  }
+
+  .leftBackgroundOverlay {
+    .vbox();
+    .stretch();
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    height: 480px;
+    align-items: center;
+    background: linear-gradient(105deg, transparent 
+    min(960px, 50vw), @color-light-gray min(960px, 50vw));
+    z-index: 1;
+    padding: 48px;
+  }
+
+  .rightBackgroundOverlay {
+    .vbox();
+    .stretch();
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: 480px;
+    align-items: center;
+    background: linear-gradient(75deg, @color-light-gray calc(100vw - min(960px, 50vw)), transparent 
+    min(960px, 50vw));
+    z-index: 1;
+    padding: 48px;
+  }
+
+  .cardLeftTextContainer {
+    .hbox();
+    .stretch();
+    height: 100%;
+    max-width: @max-page-width;
+    justify-content: flex-start;
+  }
+
+  .cardRightTextContainer {
+    .hbox();
+    .stretch();
+    height: 100%;
+    max-width: @max-page-width;
+    justify-content: flex-end;
+  }
+
+  .cardText {
+    .vbox();
+    .Montserrat();
+    font-size: 24px;
+    line-height: 1.5;
+    height: 100%;
+    max-width: 450px;
+    justify-content: center;
+  }
+
+  .cardsContainer {
+    .vbox();
+    .stretch();
+  }
+
+  .bullet {
+    display: list-item;
+    list-style-type: disc;
+    margin-bottom: 8px;
+  }
+
+  .leftPictureLabel {
+    .Montserrat();
+    color: @color-text-primary-inverted;
+    position: absolute;
+    bottom: 36px;
+    left: 96px;
+    font-weight: 800;
+    font-size: 96px;
+    text-transform: uppercase;
+  }
+
+  .rightPictureLabel {
+    .Montserrat();
+    color: @color-text-primary-inverted;
+    position: absolute;
+    bottom: 36px;
+    right: 96px;
+    font-weight: 800;
+    font-size: 96px;
+    text-transform: uppercase;
   }
 }
