@@ -1,0 +1,81 @@
+@import (reference) '../styles/colors.less';
+@import (reference) '../styles/mixins.less';
+@import (reference) '../styles/fonts.less';
+
+:local {
+  .content {
+    position: relative;
+    .vbox();
+    .stretch();
+  }
+
+  .countryName {
+    .Lora();
+  }
+
+  .tabs {
+    .hbox();
+  }
+
+  .header {
+    .Lora();
+    letter-spacing: 1.2px;
+    font-size: 36px;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  .overview {
+    .Montserrat();
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    color: @color-black-text;
+  }
+
+  .photoContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 96px;
+    width: 96px;
+    border-radius: 100%;
+    overflow: hidden;
+    margin-right: 24px;
+  }
+
+  .photo {
+    height: 96px;
+    width: 96px;
+    object-fit: cover;
+  }
+
+  .exit {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+
+    height: 24px;
+    width: 24px;
+    cursor: pointer;
+  }
+
+  .peopleText {
+    .vbox();
+    .Lora();
+    font-size: 18px;
+    margin-right: 36px;
+  }
+
+  .groupMetadata {
+    .hbox();
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .field {
+    margin-bottom: 8px;
+  }
+
+
+}

@@ -38,10 +38,6 @@ function Home() {
     setActiveTaskInfoCard(null);
   }, []);
 
-  const toggleLogoOnNavbar = () => {
-    setShowLogoInNavbar(!showLogoInNavbar);
-  }
-
   const renderBanner = () => {
     return (
       <div className={classNames(classes.section, classes.bannerSection)}>
@@ -74,7 +70,6 @@ function Home() {
   };
 
   const renderTaskInfoList = () => {
-    console.log(activeTaskInfoCard);
     return (
       <div className={classNames(classes.section, classes.taskInfoSection)}>
         <div className={classes.taskCardList}>
