@@ -1,4 +1,5 @@
 import {getAssetUrl} from '../utils/import_utils';
+import {Link} from 'react-router-dom';
 import classNames from 'classnames';
 import * as classes from './navbar.less';
 
@@ -10,6 +11,7 @@ interface NavLink {
 interface NavTab {
   name: string;
   items: NavLink[];
+  href?: string;
 }
 
 interface Props {
@@ -30,6 +32,7 @@ function Navbar(props: Props) {
     {
       name: 'Get Involved',
       items: [],
+      href: '/get-involved',
     },
     {
       name: 'Connect',
@@ -43,7 +46,9 @@ function Navbar(props: Props) {
 
   const renderTab = (tab: NavTab) => {
     // TODO (johnli): Create an anchored popover component.
-    return <span className={classes.tab}>{tab.name}</span>;
+    return tab.href
+      ? <Link className={classes.tab} to={tab.href}>{tab.name}</Link>
+      : <span className={classes.tab}>{tab.name}</span>;
   };
 
   return (

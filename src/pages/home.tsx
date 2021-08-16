@@ -151,7 +151,7 @@ function Home() {
                     <span className={classes.taskCardDescriptionHeader}>Your light is purposeful.</span>
                     <span className={classes.taskCardVerse}>Let your light shine before men in such a way that they may see your good works, and glorify your Father who is in heaven."</span>
                     <span className={classes.taskCardVerseSignature}>Matthew 5:16</span>
-                    <Link className={classes.link} to={'/get-involved'}>
+                    <Link className={classNames(classes.link, classes.marginTop)} to={'/get-involved'}>
                         <Button className={classes.taskCardButton} onClick={() => {}} style={ButtonStyle.Secondary}>Get Involved</Button>
                     </Link>
                   </div>
