@@ -14,7 +14,7 @@ function Footer(props: Props) {
           <div className={classes.linksContainer}>
             <div className={classes.links}>
               <span className={classes.linkHeader}>General</span>
-              <span className={classes.link}>About</span>
+              <Link className={classNames(classes.link, classes.allowed)} to={'about'}>About</Link>
               <span className={classes.link}>History</span>
               <span className={classes.link}>Beliefs</span>
             </div>
@@ -28,7 +28,7 @@ function Footer(props: Props) {
             <div className={classes.links}>
               <span className={classes.linkHeader}>Support</span>
               <span className={classes.link}>Donate</span>
-              <Link className={classNames(classes.link, classes.allowed)} to={'/get-involved'}>Get Involved</Link>
+              <Link className={classNames(classes.link, classes.allowed)} to={'get-involved'}>Get Involved</Link>
               <span className={classes.link}>Finances & Partners</span>
               <span className={classes.link}>Feedback</span>
             </div>

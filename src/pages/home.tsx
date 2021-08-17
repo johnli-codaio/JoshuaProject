@@ -119,8 +119,8 @@ function Home() {
                 ? <div className={classes.taskDescriptionContainer}>
                     <img className={classes.minimize} src={getAssetUrl('minimize.svg')} onClick={resetTaskCard}/>
                     <span className={classes.taskCardDescriptionHeader}>Joshua Project seeks to <br /><b>define</b> the unfinished task of the <b>Great Commission</b> by using <b>data</b> to spotlight global ethnic people groups with the <br /><b>fewest followers of Christ</b></span>
-                    <Link className={classes.link} to={'/who-are-the-unreached'}>
-                      <Button className={classes.taskCardButton} onClick={() => {}} style={ButtonStyle.Secondary}>Who are these people groups?</Button>
+                    <Link className={classes.link} to={'/about'}>
+                      <Button className={classes.taskCardButton} onClick={() => {}} style={ButtonStyle.Secondary}>About us</Button>
                     </Link>
                   </div>
                 : null}

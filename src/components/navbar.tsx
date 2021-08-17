@@ -22,6 +22,11 @@ function Navbar(props: Props) {
   const {showLogo} = props;
   const tabs: NavTab[] = [
     {
+      name: 'About',
+      items: [],
+      href: '/about',
+    },
+    {
       name: 'Unreached',
       items: [],
       href: '/who-are-the-unreached',
@@ -37,10 +42,6 @@ function Navbar(props: Props) {
     },
     {
       name: 'Connect',
-      items: [],
-    },
-    {
-      name: 'About',
       items: [],
     },
   ];
