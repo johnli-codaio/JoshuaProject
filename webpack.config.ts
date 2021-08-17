@@ -40,6 +40,7 @@ const config = {
   devServer: {
     port: process.env.PORT || 8080,
     contentBase: 'dist/',
+    historyApiFallback: true
   },
   plugins: [
     new HtmlWebpackPlugin({
