@@ -1,13 +1,11 @@
-import {getAssetUrl} from '../utils/import_utils';
 import classes from './people_info.less';
 
 interface Props {
   peopleGroup: any;
-  onClose: () => void;
 }
 
 function PeopleInfo(props: Props) {
-  const {peopleGroup, onClose} = props;
+  const {peopleGroup} = props;
 
   const renderPeopleGroupImage = () => {
     if (peopleGroup.Photo === 'Y') {
@@ -21,7 +19,6 @@ function PeopleInfo(props: Props) {
 
   return (
     <div className={classes.content}>
-      <img className={classes.exit} src={getAssetUrl('x-circle.svg')} onClick={onClose} />
       <div className={classes.information}>
         <div className={classes.groupMetadata}>
           {renderPeopleGroupImage()}

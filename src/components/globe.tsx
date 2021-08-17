@@ -32,11 +32,6 @@ const CountryColorCodedSeverity = {
   [Severity.Extreme]: '#AA747E',
 };
 
-const PeopleColorCodedSeverity = {
-  [Severity.Moderate]: '#709775',
-  [Severity.Extreme]: '#D00000',
-}
-
 // TODO (johnli): Look into hover tooltip
 function Globe() {
   const globeRef = useRef<any>(null);
@@ -48,7 +43,7 @@ function Globe() {
   const [initialized, setInitialized] = useState<boolean> (false);
   const [currentCountry, setCurrentCountry] = useState<any | null>(null);
   const [hoveredCountry, setHoveredCountry] = useState<any | null>(null);
-  const [currentPeopleGroup, setCurrentPeopleGroup] = useState<any | null>(null);
+  const [currentHoveredPeopleGroup, setCurrentHoveredPeopleGroup] = useState<any | null>(null);
 
   const setupLighting = () => {
     const globe = globeRef.current;
@@ -165,10 +160,6 @@ function Globe() {
     setCountryPeopleData([]);
   }, []);
 
-  const onPeopleClose = useCallback(() => {
-    setCurrentPeopleGroup(null);
-  }, []);
-
   const renderCountryDetails = () => {
     if (!currentCountry) {
       return null;
@@ -184,13 +175,13 @@ function Globe() {
   };
 
   const renderPeopleDetails = () => {
-    if (!currentPeopleGroup) {
+    if (!currentHoveredPeopleGroup) {
       return null;
     }
 
     return (
       <div className={classes.peopleContainer}>
-        <PeopleInfo peopleGroup={currentPeopleGroup} onClose={onPeopleClose} />
+        <PeopleInfo peopleGroup={currentHoveredPeopleGroup} />
       </div> 
     );
   };
@@ -216,7 +207,6 @@ function Globe() {
           onPolygonHover={setHoveredCountry}
           onPolygonClick={country => {
             setCurrentCountry(country);
-            setCurrentPeopleGroup(null);
           }}
           polygonAltitude={polygon => {
             if (polygon === currentCountry) {
@@ -230,10 +220,10 @@ function Globe() {
           pointsData={countryPeopleData}
           pointLat={(p: any) => p.Latitude}
           pointLng={(p: any) => p.Longitude}
-          pointRadius={0.30}
-          pointColor={(p: any) => p.LeastReached === 'Y' ? PeopleColorCodedSeverity[Severity.Extreme] : PeopleColorCodedSeverity[Severity.Moderate]}
+          pointRadius={0.35}
+          pointColor={(p: any) => p === currentHoveredPeopleGroup ? '#BD619E' : '#813668'}
           pointAltitude={(p: any) => Math.max(Math.log(p.WorkersNeeded || 1) * 0.07 + 0.1, 0.1)}
-          onPointClick={setCurrentPeopleGroup}
+          onPointHover={setCurrentHoveredPeopleGroup}
           pointLabel={(point: any) => {
             return `<span style="color:#111111;">${point.NaturalName}</span>`;
           }}
