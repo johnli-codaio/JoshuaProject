@@ -52,7 +52,7 @@ function Globe() {
       const controls = globe.controls();
       const ambientLighting = lighting.children[1];
       const directionalLighting = lighting.children[2];
-  
+
       ambientLighting.intensity = 1.25;
       directionalLighting.intensity = 0.05;
 
@@ -67,19 +67,21 @@ function Globe() {
     const res = await fetch(getDataUrl('countries.geo.json'));
     const geoLocation = await res.json();
 
-    const {data: fetchedCountryData} = await getCountries();
+    const res_countries = await fetch(getDataUrl('jp_countries.json'));
+    const fetchedCountryData = await res_countries.json();
     const fetchedCountryDataMap = _.zipObject(
       fetchedCountryData.data.map(country => country.ISO2),
       fetchedCountryData.data,
     );
-    
+
 
     setCountries(geoLocation);
     setCountryData(fetchedCountryDataMap);
   };
-  
+
   const loadPeopleData = async () => {
-    const {data: fetchedPeopleData} = await getPeoples();
+    const res_people = await fetch(getDataUrl('jp_people.json'));
+    const fetchedPeopleData = await res_people.json();
     setPeopleData(fetchedPeopleData.data);
   };
 
@@ -182,7 +184,7 @@ function Globe() {
     return (
       <div className={classes.peopleContainer}>
         <PeopleInfo peopleGroup={currentHoveredPeopleGroup} />
-      </div> 
+      </div>
     );
   };
 
