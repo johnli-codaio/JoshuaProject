@@ -1,13 +1,26 @@
 import Footer from '../components/footer';
 import Navbar from '../components/navbar';
 import classes from './get_involved.less';
-import classNames from 'classnames';
 import {getAssetUrl} from '../utils/import_utils';
+import {useCallback} from 'react';
+import {useRef} from 'react';
 
 function GetInvolved() {
+  const localRef = useRef(null);
+  const adoptRef = useRef(null);
+  const prayRef = useRef(null);
+  const goRef = useRef(null);
+  const enrollRef = useRef(null);
+
+  const scrollIntoView = useCallback(ref => {
+    if (ref.current) {
+      ref.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, []);
+
   const renderLocalCard = () => {
     return (
-      <div className={classes.getInvolvedCard}>
+      <div className={classes.getInvolvedCard} ref={localRef}>
         <img className={classes.leftCardImage} src={getAssetUrl('get_involved/local_card.png')} />
         <span className={classes.leftPictureLabel}>Local</span> 
         <div className={classes.leftBackgroundOverlay}> 
@@ -38,7 +51,7 @@ function GetInvolved() {
 
   const renderAdoptCard = () => {
     return (
-      <div className={classes.getInvolvedCard}>
+      <div className={classes.getInvolvedCard} ref={adoptRef}>
         <img className={classes.rightCardImage} src={getAssetUrl('get_involved/adopt_card.png')} />
         <span className={classes.rightPictureLabel}>Adopt</span> 
         <div className={classes.rightBackgroundOverlay}> 
@@ -58,7 +71,7 @@ function GetInvolved() {
 
   const renderPrayCard = () => {
     return (
-      <div className={classes.getInvolvedCard}>
+      <div className={classes.getInvolvedCard} ref={prayRef}>
         <img className={classes.leftCardImage} src={getAssetUrl('get_involved/pray_card.png')} />
         <span className={classes.leftPictureLabel}>Pray</span> 
         <div className={classes.leftBackgroundOverlay}> 
@@ -84,7 +97,7 @@ function GetInvolved() {
 
   const renderGoCard = () => {
     return (
-      <div className={classes.getInvolvedCard}>
+      <div className={classes.getInvolvedCard} ref={goRef}>
         <img className={classes.rightCardImage} src={getAssetUrl('get_involved/go_card.png')} />
         <span className={classes.rightPictureLabel}>Go</span> 
         <div className={classes.rightBackgroundOverlay}> 
@@ -110,7 +123,7 @@ function GetInvolved() {
 
   const renderEnrollCard = () => {
     return (
-      <div className={classes.getInvolvedCard}>
+      <div className={classes.getInvolvedCard} ref={enrollRef}>
         <img className={classes.leftCardImage} src={getAssetUrl('get_involved/enroll_card.png')} />
         <span className={classes.leftPictureLabel}>Enroll</span> 
         <div className={classes.leftBackgroundOverlay}> 
@@ -146,19 +159,19 @@ function GetInvolved() {
                 <div className={classes.row}>
                   <div className={classes.three_column}>
                     <img className={classes.logo} src={getAssetUrl('get_involved/take_local_action.png')}/>
-                    <div className={classes.logo_text}>
+                    <div className={classes.logo_text} onClick={() => scrollIntoView(localRef)}>
                         <b>Take Local Action</b>
                     </div>
                   </div>
                   <div className={classes.three_column}>
                     <img className={classes.logo} src={getAssetUrl('get_involved/adopt_people_group.png')}/>
-                    <div className={classes.logo_text}>
-                        <a className={classes.link} href={'https://aims.org/upg-adoption/'}> <b>Adopt a People Group</b> </a>
+                    <div className={classes.logo_text} onClick={() => scrollIntoView(adoptRef)}>
+                        <b>Adopt a People Group</b>
                     </div>
                   </div>
                   <div className={classes.three_column}>
                     <img className={classes.logo} src={getAssetUrl('get_involved/pray_for_them.png')}/>
-                    <div className={classes.logo_text}>
+                    <div className={classes.logo_text} onClick={() => scrollIntoView(prayRef)}>
                         <b>Pray for Them</b>
                     </div>
                   </div>
@@ -171,13 +184,13 @@ function GetInvolved() {
                 <div className={classes.row}>
                   <div className={classes.two_column}>
                     <img className={classes.logo} src={getAssetUrl('get_involved/go_to_unreached.png')}/>
-                    <div className={classes.logo_text}>
+                    <div className={classes.logo_text} onClick={() => scrollIntoView(goRef)}>
                         <b>Go to the Unreached</b>
                     </div>
                   </div>
                   <div className={classes.two_column}>
                     <img className={classes.logo} src={getAssetUrl('get_involved/enroll_course.png')}/>
-                    <div className={classes.logo_text}>
+                    <div className={classes.logo_text} onClick={() => scrollIntoView(enrollRef)}>
                         <b>Enroll in a Course</b>
                     </div>
                   </div>

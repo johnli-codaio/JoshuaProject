@@ -24,15 +24,16 @@ function Navbar(props: Props) {
     {
       name: 'Unreached',
       items: [],
-    },
-    {
-      name: 'Share',
-      items: [],
+      href: '/who-are-the-unreached',
     },
     {
       name: 'Get Involved',
       items: [],
       href: '/get-involved',
+    },
+    {
+      name: 'Share',
+      items: [],
     },
     {
       name: 'Connect',
