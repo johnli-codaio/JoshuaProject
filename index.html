@@ -10,6 +10,10 @@
     <title>Joshua Project</title>
 
     <script>
+    if (window.location.host === 'jp-prototype.idserve.us' && window.location.protocol === 'http:') {
+      window.location.protocol = 'https'
+    }
+
     window['_fs_debug'] = false;
     window['_fs_host'] = 'fullstory.com';
     window['_fs_script'] = 'edge.fullstory.com/s/fs.js';
