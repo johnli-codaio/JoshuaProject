@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "yarn clear-build && webpack serve --config ./webpack.config.ts --port ${PORT:-8080} --host 0.0.0.0 --disable-host-check",
+    "start": "yarn dev",
+    "dev": "yarn clear-build && webpack serve --config ./webpack.config.ts",
     "clear-build": "rimraf ./dist"
   },
   "dependencies": {
